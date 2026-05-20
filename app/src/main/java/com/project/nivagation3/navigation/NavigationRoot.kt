@@ -3,7 +3,7 @@ package com.project.nivagation3.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
-import androidx.navigation3.runtime.NavEntry
+import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
@@ -18,35 +18,21 @@ fun NavigationRoot(modifier: Modifier = Modifier) {
         backStack = backStack,
         entryDecorators = listOf(
             rememberSaveableStateHolderNavEntryDecorator(),
-            rememberViewModelStoreNavEntryDecorator {
-                true
-            }
+            rememberViewModelStoreNavEntryDecorator()
         ),
-        entryProvider = { key ->
-            when (key) {
-                is Route.TodoList -> {
-                    NavEntry(
-                        key = key,
-                    ) {
-                        TodoListScreen(
-                            onTodoClick = { todoId ->
-                                backStack.add(Route.TodoDetail(todoId))
-                            }
-                        )
+        entryProvider = entryProvider{
+            entry<Route.TodoList> {
+                TodoListScreen(
+                    onTodoClick = { todoId ->
+                        backStack.add(Route.TodoDetail(todoId))
                     }
-                }
+                )
+            }
 
-                is Route.TodoDetail -> {
-                    NavEntry(
-                        key = key
-                    ) {
-                        TodoListDetailsScreen(
-                            todo = key.todo
-                        )
-                    }
-                }
-
-                else -> error("Unknown route: $key")
+            entry<Route.TodoDetail> {
+                TodoListDetailsScreen(
+                    todo = it.todo
+                )
             }
         }
     )
