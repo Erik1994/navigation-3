@@ -1,4 +1,4 @@
-package com.project.nivagation3.viewModel
+package com.project.nivagation3.todo
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

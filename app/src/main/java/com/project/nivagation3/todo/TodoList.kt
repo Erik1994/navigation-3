@@ -1,4 +1,4 @@
-package com.project.nivagation3.features
+package com.project.nivagation3.todo
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.project.nivagation3.viewModel.TodoViewModel
 
 @Composable
 fun TodoListScreen(

@@ -1,0 +1,22 @@
+package com.project.nivagation3.auth
+
+import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+
+class SharedAuthViewModel: ViewModel() {
+    private val _counter = MutableStateFlow(0)
+    val counter = _counter.asStateFlow()
+    init {
+        println("SharedAuthViewModel created")
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        println("SharedAuthViewModel cleared")
+    }
+
+    fun increment() {
+        _counter.value++
+    }
+}

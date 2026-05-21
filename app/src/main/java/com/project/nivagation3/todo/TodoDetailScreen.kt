@@ -1,4 +1,4 @@
-package com.project.nivagation3.features
+package com.project.nivagation3.todo
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -11,7 +11,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.project.nivagation3.viewModel.TodoDetailViewModel
 
 @Composable
 fun TodoListDetailsScreen(

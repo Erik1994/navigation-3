@@ -1,4 +1,4 @@
-package com.project.nivagation3.navigation
+package com.project.nivagation3.todo
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -7,31 +7,31 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
-import com.project.nivagation3.auth.AuthNavigation
-import com.project.nivagation3.todo.TodoNavigation
+import com.project.nivagation3.navigation.Route
 
 @Composable
-fun NavigationRoot(modifier: Modifier = Modifier) {
-    val rootBackStack = rememberNavBackStack(Route.Auth)
+fun TodoNavigation(modifier: Modifier = Modifier) {
+    val todoBackStack = rememberNavBackStack(Route.Todo.TodoList)
     NavDisplay(
         modifier = modifier,
-        backStack = rootBackStack,
+        backStack = todoBackStack,
         entryDecorators = listOf(
             rememberSaveableStateHolderNavEntryDecorator(),
             rememberViewModelStoreNavEntryDecorator()
         ),
         entryProvider = entryProvider {
-            entry<Route.Auth> {
-                AuthNavigation(
-                    onLogin = {
-                        rootBackStack.remove(Route.Auth)
-                        rootBackStack.add(Route.Todo)
+            entry<Route.Todo.TodoList> {
+                TodoListScreen(
+                   onTodoClick = { todoId ->
+                        todoBackStack.add(Route.Todo.TodoDetail(todoId))
                     }
                 )
             }
 
-            entry<Route.Todo> {
-                TodoNavigation()
+            entry<Route.Todo.TodoDetail> {
+                TodoListDetailsScreen(
+                    todo = it.todo
+                )
             }
         }
     )
